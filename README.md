@@ -1,73 +1,57 @@
-# React + TypeScript + Vite
+---
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## 🔐 Role Based UI Guide
 
-Currently, two official plugins are available:
+| Feature | Viewer | Admin |
+|---|---|---|
+| View Dashboard | ✅ | ✅ |
+| View Transactions | ✅ | ✅ |
+| View Insights | ✅ | ✅ |
+| Add Transaction | ❌ | ✅ |
+| Edit Transaction | ❌ | ✅ |
+| Delete Transaction | ❌ | ✅ |
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+To switch roles use the dropdown in the top right corner of the header.
 
-## React Compiler
+---
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## 📊 Mock Data
 
-## Expanding the ESLint configuration
+The app uses realistic mock data covering:
+- **16 months** of transactions (January 2025 to April 2026)
+- **84 transactions** total
+- Mix of Salary, Freelance income and various expense categories
+- Realistic Indian Rupee (₹) amounts
+- Categories include Food, Rent, Transport, Entertainment, Healthcare, Shopping, Utilities, Freelance and Salary
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+---
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## 🤔 Technical Decisions and Trade-offs
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+### Why Zustand over Redux?
+Zustand requires significantly less boilerplate code while providing the same functionality. For a project of this scale, Redux would be over-engineering. Zustand is also the current industry trend for React state management.
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+### Why Recharts over Chart.js?
+Recharts is built specifically for React and uses React components natively. This makes it much easier to integrate and customize compared to Chart.js which requires imperative DOM manipulation.
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+### Why Vite over Create React App?
+Vite offers significantly faster development server startup and hot module replacement. Create React App is no longer actively maintained and Vite is the current industry standard.
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+### Mock Data vs Backend
+Since this is a frontend evaluation, all data is mocked locally. The architecture is designed so that replacing mock data with real API calls would require minimal changes — only the data layer in mockData.ts and store actions would need to be updated.
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+### TypeScript
+TypeScript was chosen to demonstrate code quality and type safety. All components, store state and data models are fully typed which prevents runtime errors and improves developer experience.
+
+---
+
+## 👩‍💻 Author
+
+**Bhavya Charitha**
+- GitHub: [@BhavyaCharitha2005](https://github.com/BhavyaCharitha2005)
+
+---
+
+## 📝 License
+
+This project is built for evaluation purposes.
